@@ -5,32 +5,143 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тест стрічки — Усмішка Миттєво</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: sans-serif; background: #000; color: #fff; overflow: hidden; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: sans-serif; 
+            background: #000; 
+            color: #fff; 
+            overflow: hidden; 
+        }
         
         .app-header {
-            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 60px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 0 20px; 
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
             z-index: 10;
         }
-        .logo { font-size: 20px; font-weight: bold; }
-        .logo span { color: #fe2c55; }
-        .btn-upload { background: #fe2c55; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; }
-
-        .video-feed { width: 100%; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
         
-        .video-card { position: relative; width: 100%; height: 100vh; scroll-snap-align: start; display: flex; justify-content: center; align-items: center; background: #000; }
-        .feed-video { width: 100%; height: 100%; object-fit: cover; }
+        .logo { 
+            font-size: 20px; 
+            font-weight: bold; 
+        }
+        
+        .logo span { 
+            color: #fe2c55; 
+        }
+        
+        .btn-upload { 
+            background: #fe2c55; 
+            color: #fff; 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: background 0.2s;
+        }
 
-        .interaction-panel { position: absolute; right: 15px; bottom: 120px; display: flex; flex-direction: column; gap: 20px; z-index: 5; }
-        .action-btn { background: rgba(34, 34, 34, 0.6); border: none; width: 55px; height: 55px; border-radius: 50%; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; backdrop-filter: blur(10px); }
-        .action-btn .icon { font-size: 22px; }
-        .action-btn .count { font-size: 12px; margin-top: 2px; font-weight: bold; }
+        .btn-upload:hover {
+            background: #e11d43;
+        }
 
-        .video-details { position: absolute; left: 15px; bottom: 40px; max-width: 80%; z-index: 5; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
-        .video-details h3 { font-size: 18px; margin-bottom: 5px; }
-        .video-details p { font-size: 14px; color: #e1e1e1; }
+        .video-feed { 
+            width: 100%; 
+            height: 100vh; 
+            overflow-y: scroll; 
+            scroll-snap-type: y mandatory; 
+            scroll-behavior: smooth; 
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .video-card { 
+            position: relative; 
+            width: 100%; 
+            height: 100vh; 
+            scroll-snap-align: start; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: #000; 
+        }
+        
+        /* Стилі для адаптивного плеєра Telegram */
+        .telegram-embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+            max-width: 600px;
+        }
+
+        .interaction-panel { 
+            position: absolute; 
+            right: 15px; 
+            bottom: 120px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 20px; 
+            z-index: 5; 
+        }
+        
+        .action-btn { 
+            background: rgba(34, 34, 34, 0.6); 
+            border: none; 
+            width: 55px; 
+            height: 55px; 
+            border-radius: 50%; 
+            color: white; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            cursor: pointer; 
+            backdrop-filter: blur(10px); 
+            transition: transform 0.1s;
+        }
+
+        .action-btn:active {
+            transform: scale(0.9);
+        }
+        
+        .action-btn .icon { 
+            font-size: 22px; 
+        }
+        
+        .action-btn .count { 
+            font-size: 12px; 
+            margin-top: 2px; 
+            font-weight: bold; 
+        }
+
+        .video-details { 
+            position: absolute; 
+            left: 15px; 
+            bottom: 40px; 
+            max-width: 80%; 
+            z-index: 5; 
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.8); 
+        }
+        
+        .video-details h3 { 
+            font-size: 18px; 
+            margin-bottom: 5px; 
+        }
+        
+        .video-details p { 
+            font-size: 14px; 
+            color: #e1e1e1; 
+        }
     </style>
 </head>
 <body>
@@ -41,16 +152,16 @@
     </header>
 
     <main class="video-feed">
-        <!-- КАРТКА 1 -->
+        <!-- КАРТКА 1 (Ваше відео з Telegram) -->
         <section class="video-card">
-            <!-- Вставте сюди ваше інтернет-посилання на відео з Discord/Telegram -->
-            <video class="feed-video" src="https://discordapp.com" loop playsinline muted></video>
+            <!-- Вбудований фрейм Telegram замість стандартного відео -->
+            <iframe class="telegram-embed" src="https://t.me" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+            
             <div class="interaction-panel">
                 <button class="action-btn like-btn" data-liked="false">
                     <span class="icon">🤍</span>
                     <span class="count">42</span>
                 </button>
-                <button class="action-btn mute-btn"><span class="icon">🔇</span></button>
             </div>
             <div class="video-details">
                 <h3>@taras_creator</h3>
@@ -60,7 +171,6 @@
 
         <!-- КАРТКА 2 -->
         <section class="video-card">
-            <!-- Вставте сюди друге інтернет-посилання на відео -->
             <video class="feed-video" src="https://discordapp.com" loop playsinline muted></video>
             <div class="interaction-panel">
                 <button class="action-btn like-btn" data-liked="false">
@@ -77,23 +187,26 @@
     </main>
 
     <script>
-        // Автовідтворення при скролі
+        // Керування звичайними відео (для Картки 2)
         const videos = document.querySelectorAll('.feed-video');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const video = entry.target;
                 if (entry.isIntersecting) {
-                    entry.target.play().catch(() => {});
+                    video.play().catch(() => {});
                 } else {
-                    entry.target.pause();
-                    entry.target.currentTime = 0;
+                    video.pause();
+                    video.currentTime = 0;
                 }
             });
         }, { threshold: 0.6 });
+        
         videos.forEach(v => observer.observe(v));
 
-        // Робота лайків
+        // Обробка лайків
         document.querySelectorAll('.like-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
                 const count = btn.querySelector('.count');
                 const icon = btn.querySelector('.icon');
                 let isLiked = btn.getAttribute('data-liked') === 'true';
@@ -111,19 +224,20 @@
             });
         });
 
-        // Загальний звук
-        let muted = true;
-        document.querySelectorAll('.mute-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                muted = !muted;
-                videos.forEach(v => v.muted = muted);
-                document.querySelectorAll('.mute-btn').forEach(b => {
-                    b.querySelector('.icon').textContent = muted ? '🔇' : '🔊';
+        // Керування звуком для плеєрів типу <video>
+        document.querySelectorAll('.video-card').forEach(card => {
+            const video = card.querySelector('.feed-video');
+            const muteBtn = card.querySelector('.mute-btn');
+            if (video && muteBtn) {
+                const icon = muteBtn.querySelector('.icon');
+                muteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    video.muted = !video.muted;
+                    icon.textContent = video.muted ? '🔇' : '🔊';
                 });
-            });
+            }
         });
 
-        // Кнопка відправки роликів для модерації
         function openUploadMenu() {
             alert('Зручний тест: надішліть відео адміну в Telegram @ваш_нік для публікації!');
         }
