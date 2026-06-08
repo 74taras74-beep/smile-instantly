@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -76,12 +77,10 @@
             background: #000; 
         }
         
-        /* Стилі для адаптивного плеєра Telegram */
-        .telegram-embed {
-            width: 100%;
-            height: 100%;
-            border: none;
-            max-width: 600px;
+        .feed-video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
         }
 
         .interaction-panel { 
@@ -152,16 +151,17 @@
     </header>
 
     <main class="video-feed">
-        <!-- КАРТКА 1 (Ваше відео з Telegram) -->
+        <!-- КАРТКА 1 -->
         <section class="video-card">
-            <!-- Вбудований фрейм Telegram замість стандартного відео -->
-            <iframe class="telegram-embed" src="https://t.me" allowtransparency="true" allowfullscreen="true" scrolling="no"></iframe>
+            <!-- Шлях до першого файлу у вашій папці комп'ютера / репозиторії -->
+            <video class="feed-video" src="video1.mp4" loop playsinline muted></video>
             
             <div class="interaction-panel">
                 <button class="action-btn like-btn" data-liked="false">
                     <span class="icon">🤍</span>
                     <span class="count">42</span>
                 </button>
+                <button class="action-btn mute-btn"><span class="icon">🔇</span></button>
             </div>
             <div class="video-details">
                 <h3>@taras_creator</h3>
@@ -171,7 +171,9 @@
 
         <!-- КАРТКА 2 -->
         <section class="video-card">
-            <video class="feed-video" src="https://discordapp.com" loop playsinline muted></video>
+            <!-- Шлях до другого файлу у вашій папці комп'ютера / репозиторії -->
+            <video class="feed-video" src="video2.mp4" loop playsinline muted></video>
+            
             <div class="interaction-panel">
                 <button class="action-btn like-btn" data-liked="false">
                     <span class="icon">🤍</span>
@@ -187,8 +189,9 @@
     </main>
 
     <script>
-        // Керування звичайними відео (для Картки 2)
         const videos = document.querySelectorAll('.feed-video');
+        
+        // Автоматичне відтворення поточного відео при скролі
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const video = entry.target;
@@ -203,7 +206,7 @@
         
         videos.forEach(v => observer.observe(v));
 
-        // Обробка лайків
+        // Обробка кліків по кнопках лайків
         document.querySelectorAll('.like-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -224,10 +227,11 @@
             });
         });
 
-        // Керування звуком для плеєрів типу <video>
+        // Індивідуальне керування звуком для кожної картки окремо
         document.querySelectorAll('.video-card').forEach(card => {
             const video = card.querySelector('.feed-video');
             const muteBtn = card.querySelector('.mute-btn');
+            
             if (video && muteBtn) {
                 const icon = muteBtn.querySelector('.icon');
                 muteBtn.addEventListener('click', (e) => {
