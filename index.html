@@ -3,133 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Усмішка миттєво — Твій швидкий заряд позитиву</title>
-    <meta name="description" content="Перший у світі додаток для миттєвого підняття настрою. Отримай порцію дофаміну за одну секунду!">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
-    
+    <title>Усмішка миттєво</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Захисний фікс відображення для мобільних екранів -->
-    <style>
-        .hero-grid { display: grid !important; }
-        .smile-btn { display: inline-flex !important; }
-        .phone-mockup { display: flex !important; }
-    </style>
 </head>
 <body>
 
-    <div class="glow-bg"></div>
+    <div class="wrapper">
+        <!-- Шапка сайту -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-title">😊 Усмішка миттєво</span>
+                <span class="logo-subtitle">Переваги</span>
+            </div>
+            <button class="btn-download">Завантажити</button>
+        </header>
 
-    <header class="main-header">
-        <div class="container header-flex">
-            <a href="#" class="logo" id="navLogo">😊 Усмішка миттєво</a>
-            <nav class="main-nav">
-                <a href="#features" class="nav-link" id="linkFeatures">Переваги</a>
-                <a href="#download" class="nav-btn" id="btnDownloadHeader">Завантажити</a>
-            </nav>
-        </div>
-    </header>
+        <!-- Головний контент сайту -->
+        <main class="main-content">
+            <h1 class="main-title">Світ став занадто серйозним?<br>Отримай усмішку <span class="highlight">миттєво!</span></h1>
+            
+            <p class="subtitle">
+                Перший у світі мобільний додаток, створений виключно для 
+                швидкого кайфу та миттєвого підняття настрою. Один клік — і 
+                наука робить тебе щасливим.
+            </p>
 
-    <main>
-        <!-- Hero Екран -->
-        <section class="hero-section">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <h1 id="heroTitle">Світ стал занадто серйозним?<br>Отримай <span>усмішку миттєво!</span></h1>
-                    <p id="heroDesc">Перший у світі мобільний додаток, створений виключно для швидкого кайфу та миттєвого підняття настрою. Один клік — і наука робить тебе щасливим.</p>
-                    
-                    <!-- Головна Кнопка -->
-                    <button class="smile-btn" id="triggerBtn" type="button" aria-live="polite">
-                        <span id="btnText">ТИСНИ СЮДИ ДЛЯ КАЙФУ</span> 😊
-                    </button>
+            <button class="btn-action">ТИСНИ СЮДИ ДЛЯ КАЙФУ 😊</button>
 
-                    <div class="demo-box">
-                        <div class="smile-content" id="smileContent" role="status" aria-hidden="true"></div>
-                    </div>
-                </div>
+            <div class="dopamine-alert">
+                <p class="dopamine-title">🚀 Дофамін: 100% Заряджено!</p>
+                <p class="dopamine-sub">Хтось просто зараз думає про тебе з усмішкою. 🥰</p>
+            </div>
+        </main>
+
+        <!-- Блок зі смартфоном та відео-плеєром -->
+        <div class="phone-container">
+            <div class="phone-frame">
+                <!-- Сама трансляція відео -->
+                <video id="myVideo" src="video1.mp4" autoplay muted loop playsinline class="phone-video"></video>
                 
-                <!-- Мокап Смартфона -->
-                <div class="hero-image-container">
-                    <div class="phone-mockup">
-                        <div class="phone-notch"></div>
-                        <div class="phone-screen">
-                            <div id="initialEmoji" class="emoji-layer">😊</div>
-                            <div id="tiktokContainer" class="tiktok-layer"></div>
-                            <div id="videoLoader" class="loader-layer">
-                                <div class="spinner"></div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Панель кастомного керування медіа -->
+                <div class="video-controls">
+                    <button id="playPauseBtn" class="control-btn" title="Пауза/Старт">⏸️</button>
+                    <button id="volumeBtn" class="control-btn" title="Увімкнути звук">🔇</button>
                 </div>
-            </div>
-        </section>
-
-        <!-- Переваги -->
-        <section id="features" class="features-section">
-            <div class="container">
-                <h2 class="section-title" id="featuresTitle">Чому це крутіше за TikTok?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🧠</div>
-                        <h3 id="f1Title">Біохакінг мозку</h3>
-                        <p id="f1Desc">TikTok виснажує дофамін. Наш ШІ видає контент у точній послідовності для швидкого зняття стресу.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🌍</div>
-                        <h3 id="f2Title">Без кордонів та хейту</h3>
-                        <p id="f2Desc">Тільки візуальний, добрий емоційний контент, зрозумілий будь-якій людині без зайвих слів.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🛡️</div>
-                        <h3 id="f3Title">Чистий дофамін</h3>
-                        <p id="f3Desc">Жорсткий фільтр зла. Тут заблоковані новини, суперечки, токсичні коментарі та політика.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Завантаження -->
-        <section id="download" class="download-section">
-            <div class="container download-box">
-                <h2 id="ctaTitle">Почніть усміхатися прямо зараз</h2>
-                <p id="ctaDesc">Завантажуйте легкий додаток для iOS та Android і трекайте свій щоденний Happiness Score.</p>
-                <div class="app-badges">
-                    <a href="#" class="badge-link store-apple" target="_blank" rel="noopener noreferrer">App Store</a>
-                    <a href="#" class="badge-link store-google" target="_blank" rel="noopener noreferrer">Google Play</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container footer-flex">
-            <p id="footerCopy">&copy; 2026 Проєкт "Усмішка миттєво". Всі права захищено глобально.</p>
-            <div class="footer-links">
-                <a href="#" id="linkPrivacy">Політика конфіденційності</a>
-                <a href="#" id="linkSupport">Підтримка</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Вікно синхронізації з ТікТок -->
-    <div id="syncModal" class="modal-overlay">
-        <div class="modal-box">
-            <div class="modal-icon">📱</div>
-            <h3 id="modalTitle">Синхронізація профілю</h3>
-            <p id="modalDesc">Бажаєте підключити ваш TikTok-акаунт, щоб зашити ваші улюблені відео прямо в додаток для швидкого доступу?</p>
-            <div class="modal-buttons">
-                <button id="btnSyncYes" class="modal-btn btn-confirm">Синхронізувати профіль</button>
-                <button id="btnSyncNo" class="modal-btn btn-cancel">Ні, локальний кеш</button>
             </div>
         </div>
     </div>
 
-    <!-- Офіційний скрипт віджета TikTok -->
-    <script async src="https://tiktok.com"></script>
-    <script src="app.js" defer></script>
+    <script src="app.js"></script>
 </body>
 </html>
