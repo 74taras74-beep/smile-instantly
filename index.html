@@ -3,54 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Усмішка миттєво</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Тест стрічки — Усмішка Миттєво</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: sans-serif; background: #000; color: #fff; overflow: hidden; }
+        
+        .app-header {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 20px; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            z-index: 10;
+        }
+        .logo { font-size: 20px; font-weight: bold; }
+        .logo span { color: #fe2c55; }
+        .btn-upload { background: #fe2c55; color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+        .video-feed { width: 100%; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        
+        .video-card { position: relative; width: 100%; height: 100vh; scroll-snap-align: start; display: flex; justify-content: center; align-items: center; background: #000; }
+        .feed-video { width: 100%; height: 100%; object-fit: cover; }
+
+        .interaction-panel { position: absolute; right: 15px; bottom: 120px; display: flex; flex-direction: column; gap: 20px; z-index: 5; }
+        .action-btn { background: rgba(34, 34, 34, 0.6); border: none; width: 55px; height: 55px; border-radius: 50%; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; backdrop-filter: blur(10px); }
+        .action-btn .icon { font-size: 22px; }
+        .action-btn .count { font-size: 12px; margin-top: 2px; font-weight: bold; }
+
+        .video-details { position: absolute; left: 15px; bottom: 40px; max-width: 80%; z-index: 5; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
+        .video-details h3 { font-size: 18px; margin-bottom: 5px; }
+        .video-details p { font-size: 14px; color: #e1e1e1; }
+    </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <!-- Шапка сайту -->
-        <header class="header">
-            <div class="logo">
-                <span class="logo-title">😊 Усмішка миттєво</span>
-                <span class="logo-subtitle">Переваги</span>
+    <header class="app-header">
+        <div class="logo">😊 Усмішка <span>Миттєво</span></div>
+        <button class="btn-upload" onclick="openUploadMenu()">+ Додати відео</button>
+    </header>
+
+    <main class="video-feed">
+        <!-- КАРТКА 1 -->
+        <section class="video-card">
+            <!-- Вставте сюди ваше інтернет-посилання на відео з Discord/Telegram -->
+            <video class="feed-video" src="https://discordapp.com" loop playsinline muted></video>
+            <div class="interaction-panel">
+                <button class="action-btn like-btn" data-liked="false">
+                    <span class="icon">🤍</span>
+                    <span class="count">42</span>
+                </button>
+                <button class="action-btn mute-btn"><span class="icon">🔇</span></button>
             </div>
-            <button class="btn-download">Завантажити</button>
-        </header>
-
-        <!-- Головний контент сайту -->
-        <main class="main-content">
-            <h1 class="main-title">Світ став занадто серйозним?<br>Отримай усмішку <span class="highlight">миттєво!</span></h1>
-            
-            <p class="subtitle">
-                Перший у світі мобільний додаток, створений виключно для 
-                швидкого кайфу та миттєвого підняття настрою. Один клік — і 
-                наука робить тебе щасливим.
-            </p>
-
-            <button class="btn-action">ТИСНИ СЮДИ ДЛЯ КАЙФУ 😊</button>
-
-            <div class="dopamine-alert">
-                <p class="dopamine-title">🚀 Дофамін: 100% Заряджено!</p>
-                <p class="dopamine-sub">Хтось просто зараз думає про тебе з усмішкою. 🥰</p>
+            <div class="video-details">
+                <h3>@taras_creator</h3>
+                <p>Тестуємо швидкість вертикальної стрічки! 🚀🔥</p>
             </div>
-        </main>
+        </section>
 
-        <!-- Блок зі смартфоном та відео-плеєром -->
-        <div class="phone-container">
-            <div class="phone-frame">
-                <!-- Сама трансляція відео -->
-                <video id="myVideo" src="video1.mp4" autoplay muted loop playsinline class="phone-video"></video>
+        <!-- КАРТКА 2 -->
+        <section class="video-card">
+            <!-- Вставте сюди друге інтернет-посилання на відео -->
+            <video class="feed-video" src="https://discordapp.com" loop playsinline muted></video>
+            <div class="interaction-panel">
+                <button class="action-btn like-btn" data-liked="false">
+                    <span class="icon">🤍</span>
+                    <span class="count">118</span>
+                </button>
+                <button class="action-btn mute-btn"><span class="icon">🔇</span></button>
+            </div>
+            <div class="video-details">
+                <h3>@user_test</h3>
+                <p>Друге тестове відео від підписників з месенджера. Свайпай вгору! 😂</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Автовідтворення при скролі
+        const videos = document.querySelectorAll('.feed-video');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.play().catch(() => {});
+                } else {
+                    entry.target.pause();
+                    entry.target.currentTime = 0;
+                }
+            });
+        }, { threshold: 0.6 });
+        videos.forEach(v => observer.observe(v));
+
+        // Робота лайків
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const count = btn.querySelector('.count');
+                const icon = btn.querySelector('.icon');
+                let isLiked = btn.getAttribute('data-liked') === 'true';
+                let num = parseInt(count.textContent);
                 
-                <!-- Панель кастомного керування медіа -->
-                <div class="video-controls">
-                    <button id="playPauseBtn" class="control-btn" title="Пауза/Старт">⏸️</button>
-                    <button id="volumeBtn" class="control-btn" title="Увімкнути звук">🔇</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                if (!isLiked) {
+                    btn.setAttribute('data-liked', 'true');
+                    icon.textContent = '❤️';
+                    count.textContent = num + 1;
+                } else {
+                    btn.setAttribute('data-liked', 'false');
+                    icon.textContent = '🤍';
+                    count.textContent = num - 1;
+                }
+            });
+        });
 
-    <script src="app.js"></script>
+        // Загальний звук
+        let muted = true;
+        document.querySelectorAll('.mute-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                muted = !muted;
+                videos.forEach(v => v.muted = muted);
+                document.querySelectorAll('.mute-btn').forEach(b => {
+                    b.querySelector('.icon').textContent = muted ? '🔇' : '🔊';
+                });
+            });
+        });
+
+        // Кнопка відправки роликів для модерації
+        function openUploadMenu() {
+            alert('Зручний тест: надішліть відео адміну в Telegram @ваш_нік для публікації!');
+        }
+    </script>
 </body>
 </html>
